@@ -14,15 +14,15 @@ namespace SecurityTest
 
         public static void StyleBundle(BundleCollection bundles)
         {
-            bundles.Add(new StyleBundle("~/css")
+            bundles.Add(new StyleBundle("~/Contect")
                      .Include("~/Content/bootstrap-special.css"));
         }
 
         public static void ScriptBundle(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/js")
+            bundles.Add(new ScriptBundle("~/Scripts")
                      .Include("~/Scripts/jquery-{version}.js")
-                     .Include("~/Scripts/bootstrap.js"));
+                     .Include("~/Scripts/bootstrap-special.js"));
         }
     }
 
