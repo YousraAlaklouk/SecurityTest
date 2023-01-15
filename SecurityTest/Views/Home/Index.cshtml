@@ -23,23 +23,22 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container px-4 px-lg-5">
             <img src="~/img/logo.png"style="width:70px; height:50px;"/>
-            <a class="navbar-brand" href="#page-top">Start Testing</a>
+            <a class="navbar-brand" href="#login">Start Testing</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#about">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#login">Login</a></li>
                     <li class="nav-item"><a class="nav-link" href="#register">Register</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About Us</a></li>
 
                 </ul>
             </div>
         </div>
     </nav>
-
     
     <!-- Masthead-->
     <header class="masthead">
@@ -75,7 +74,7 @@
 
                         Information security requires specialized skills. For many organizations, outsourcing makes more sense than having employees handle it all. You gain access to expertise without having to hire full-time specialists. It leaves you free to focus on your business with confidence that your IT systems are well protected. The type of cybersecurity service you need depends on the type of business and the required level of security. There are several business models to choose from.
 
-                        The important thing is to choose a provider that ranks high in experience and expertise in security risk management. Our penetration testing services can help you to protect all aspects of information access, both technically and physically. Call us today <a href="ContactUss.aspx">Here</a> to schedule a free consultation.
+                        The important thing is to choose a provider that ranks high in experience and expertise in security risk management. Our penetration testing services can help you to protect all aspects of information access, both technically and physically. Call us today <a href="@Url.Action("Contact","Home")"">Here</a> to schedule a free consultation.
                     </p>
                 </div>
             </div>
