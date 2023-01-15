@@ -9,7 +9,11 @@ namespace SecurityTest.Controllers
     public class TestController : Controller
     {
         // GET: Test
-        public ActionResult Index()
+        public ActionResult Test()
+        {
+            return View();
+        }
+        public ActionResult Products()
         {
             return View();
         }

@@ -150,7 +150,8 @@
     <Content Include="img\Emre-Atlier-Olca.jpg" />
     <Content Include="img\ipad.png" />
     <Content Include="img\logo.png" />
-    <Content Include="img\photo-1531297484001-80022131f5a1.jpeg" />
+    <Content Include="img\Home.jpeg" />
+    <Content Include="img\Home2.jpeg" />
     <Content Include="img\security.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -182,8 +183,9 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Enrollment\Index.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Test\Test.cshtml" />
+    <Content Include="Views\Test\Products.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
