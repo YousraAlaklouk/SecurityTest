@@ -12409,3 +12409,50 @@ body {
 .footer {
     padding: 5rem 0;
 }
+
+.wrapimg {
+    float: left;
+    margin-bottom: auto;
+    margin-right: 15px;
+}
+
+
+
+.wrap2img {
+    float: right;
+    margin: 5px;
+}
+
+
+.containerimg {
+    position: relative;
+    width: 100px;
+    max-width: 300px;
+    float: right;
+    margin-bottom: 50px;
+}
+
+.image {
+    display: block;
+    width: 100px;
+    height: auto;
+}
+
+.overlayimg {
+    position: absolute;
+    bottom: 0;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5); /* Black see-through */
+    color: #f1f1f1;
+    width: 100px;
+    transition: .5s ease;
+    opacity: 0;
+    color: white;
+    font-size: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.containerimg:hover .overlay {
+    opacity: 1;
+}
