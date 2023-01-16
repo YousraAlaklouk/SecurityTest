@@ -129,7 +129,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Model\Enroll.cs" />
-    <Compile Include="Model\Test.cs" />
+    <Compile Include="Model\Results.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
