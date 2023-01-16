@@ -56,19 +56,25 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
 
                 <div class="col-lg-8">
-                    @using (Html.BeginForm("Test1", "Test", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
+                    <h2 class="text-white mb-4">
+                        Start Using Our Amaizing Tests
+                    </h2>
+                    <table >
+                        <tr>
+                            <td >
+                                @using (Html.BeginForm("Test1", "Test", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
 
-                    <a22 href="#">
-                        <button class="btn22" >T1136.001\Create Account: Local Account!</button>
+                                    <a22 href="#">
+                                        <button class="btn22">T1136.001\Create Account: Local Account!</button>
 
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </a22>
-                        <script type="text/javascript">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </a22>
+                                    <script type="text/javascript">
 
                                         $(function () {
                                                 var msg = '@ViewData["result"]';
@@ -78,25 +84,26 @@
                                                     window.location.href = "@Url.Action("Test1", "Test")";
                                                 }
                                             });
-                        </script>
-                    }
+                                    </script>
+                                }
+                            </td>
+                            <td>
+                                @using (Html.BeginForm("Test2", "Test", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
 
-                    @using (Html.BeginForm("Test2", "Test", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
+                                    <a22 href="#">
+                                        <button class="btn22">
+                                            T1136.001\Delete Account: Local Account
+                                        </button>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
 
-                <a22 href="#">
-                    <button class="btn22">
-                        T1136.001\Delete Account: Local Account
-                    </button>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                                    </a22>
 
-</a22>
-
-                        <script type="text/javascript">
+                                    <script type="text/javascript">
 
                                         $(function () {
                                                 var msg = '@ViewData["result"]';
@@ -106,25 +113,27 @@
                                                     window.location.href = "@Url.Action("Test2", "Test")";
                                                 }
                                         });
-                        </script>
-                    }
+                                    </script>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            @using (Html.BeginForm("Test3", "Test", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
 
-                    @using (Html.BeginForm("Test3", "Test", FormMethod.Post))
-                    {
-                        @Html.AntiForgeryToken()
+                                <a22 href="#">
+                                    <button class="btn22">
+                                        T1115\Clipboard Data
+                                    </button>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
 
-                <a22 href="#">
-                    <button class="btn22">
-                        T1115\Clipboard Data
-                    </button>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                                </a22>
 
-</a22>
-                       
-                        <script type="text/javascript">
+                                <script type="text/javascript">
                             $(function() {
                             var msg = '@ViewData["result"]';
                             if (msg == '1')
@@ -134,13 +143,14 @@
 
                             }
                         });
-                        </script>
-                    }
+                                </script>
+                            }
+                        </tr>
+                    </table>
+                    <h2 class="text-white mb-4">Test History</h2>
+                    <br />
 
-                        <h2 class="text-white mb-4">Test History</h2>
-                        <br />
-
-                    </div >
+                </div>
             </div >
 
         </div >

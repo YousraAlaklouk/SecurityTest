@@ -12,6 +12,7 @@ namespace SecurityTest.Controllers
 {
     public class HomeController : Controller
     {
+        public static string email = "";
         [HttpGet]
         public ActionResult Index()
         {
@@ -85,6 +86,7 @@ namespace SecurityTest.Controllers
             {
                 Session["Email"] = e.Email.ToString();
                 return RedirectToAction("Welcome");
+               e.Email = email;
             }
             else
             {

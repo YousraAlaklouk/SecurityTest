@@ -13,6 +13,8 @@ namespace SecurityTest.Controllers
 {
     public class LoginController : Controller
     {
+        public static string email = "";
+
         // GET: Login
         public string status;
 
@@ -35,6 +37,8 @@ namespace SecurityTest.Controllers
             {
                 Session["Email"] = e.Email.ToString();
                 return RedirectToAction("Welcome");
+                e.Email = email;
+
             }
             else
             {
