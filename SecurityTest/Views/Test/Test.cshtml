@@ -1,4 +1,5 @@
-﻿
+﻿@model SecurityTest.Model.Results
+
 @{
     ViewBag.Title = "Test";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -24,7 +25,10 @@
         <div class="container px-4 px-lg-5">
             <img src="~/img/logo.png" style="width:70px; height:50px;" />
 
-            <a class="navbar-brand" href="@Url.Action("Index","Home")#login">Start Testing</a>
+            @if (Session["Email"] == null)
+            {
+                <a class="navbar-brand" href="@Url.Action("Index","Home")#login">Start Testing</a>
+            }
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
@@ -32,12 +36,20 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")#login">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")#register">Register</a></li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Products","Test")">Our Products</a></li>
 
+                    @if (Session["Email"] != null)
+                    {
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("EditAccount", "Account")">Account</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Logout", "Home")">Log Out</a></li>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")#login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")#register">Register</a></li>
+                    }
 
                 </ul>
             </div>
@@ -59,7 +71,7 @@
 
                 <div class="col-lg-8">
                     <h2 class="text-white mb-4">
-                        Start Using Our Amaizing Tests
+                        Start Using Our Amazing Tests
                     </h2>
                     <table >
                         <tr>

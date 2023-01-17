@@ -1,4 +1,6 @@
-﻿@{
+﻿@model SecurityTest.Model.Enroll
+
+@{
     ViewBag.Title = "EditAccount";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -22,7 +24,7 @@
         <div class="container px-4 px-lg-5">
             <img src="~/img/logo.png" style="width:70px; height:50px;" />
 
-            <a class="navbar-brand" href="@Url.Action("Index","Home")#login">Start Testing</a>
+            @*<a class="navbar-brand" href="@Url.Action("Index","Home")#login">Start Testing</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
@@ -31,7 +33,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About Us</a></li>*@
 
                 </ul>
             </div>
@@ -54,41 +56,29 @@
                 <div class="col-md-10 col-lg-8 mx-auto text-center">
                     <h2 class="text-white mb-5" style="color:black">Register</h2>
                     <div class="row input-group-newsletter">
-                        @using (Html.BeginForm("EditAccount", "Account", FormMethod.Post))
+                        @using (Html.BeginForm("Account", "Account", FormMethod.Post))
                         {
                             <div class="form-group" style="margin-bottom:5px">
                                 @Html.TextBoxFor(e => e.UserName, new { @class = "form-control", placeholder = "UserName *" })
-                                @Html.ValidationMessageFor(e => e.UserName)
                             </div>
                             <div class="form-group" style="margin-bottom:5px">
                                 @Html.TextBoxFor(e => e.FullName, new { @class = "form-control", placeholder = "Full Name *" })
-                                @Html.ValidationMessageFor(e => e.FullName)
                             </div>
                             <div class="form-group" style="margin-bottom:5px">
-                                @Html.PasswordFor(e => e.Password, new { id = "password", @class = "form-control", placeholder = "Password *" })
+                                @Html.TextBoxFor(e => e.Password, new { id = "password", @class = "form-control", placeholder = "Password *" })
                                 <span id="result"></span>
-                                @Html.ValidationMessageFor(e => e.Password)
                             </div>
                             <div class="form-group" style="margin-bottom:5px">
                                 @Html.PasswordFor(e => e.Confirmpwd, new { @class = "form-control", placeholder = "Confirm Password *" })
-                                @Html.ValidationMessageFor(e => e.Confirmpwd)
                             </div>
                             <div class="form-group" style="margin-bottom:5px">
                                 @Html.TextBoxFor(e => e.Email, new { @class = "form-control", placeholder = "Your Email *" })
-                                @Html.ValidationMessageFor(e => e.Email)
                             </div>
                             <div class="form-group" style="margin-bottom:5px">
                                 @Html.TextBoxFor(e => e.BirthDate, new { @class = "form-control", placeholder = "Your BirthDate in  yyyy-mm-dd Form*" })
-                                @Html.ValidationMessageFor(e => e.BirthDate)
                             </div>
-                            <div class="form-group" style="margin-bottom:10px">
-                                <div class="maxl">
-                                    @Html.RadioButtonFor(e => e.Gender, "Male", new { @class = "radio inline" })<span> Male </span>
-                                    @Html.RadioButtonFor(e => e.Gender, "Female", new { @class = "radio inline" })<span>Female </span>
-                                </div>
-                            </div>
-                            <div class="form-group" style="margin-bottom:10px">
-                                <div class="col-auto"><button class="btn btn-primary" id="submitButton" type="submit">Register!</button></div>
+                            <div class="form-group" style="margin-bottom:5px">
+                                @Html.TextBoxFor(e => e.Gender, new { @class = "form-control", placeholder = "Your BirthDate in  yyyy-mm-dd Form*" })
                             </div>
                             <script type="text/javascript">
 

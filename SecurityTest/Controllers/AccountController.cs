@@ -44,9 +44,9 @@ namespace SecurityTest.Controllers
                             dr = cmd.ExecuteReader();
                             if (dr.Read())
                             {
-                                txtUserName.Text = dr["UserName"].ToString();
-                                txtFullName.Text = dr["FullName"].ToString();
-                                txtBirthDate.Text = dr["BirthDate"].ToString();
+                                //txtUserName.Text = dr["UserName"].ToString();
+                                //txtFullName.Text = dr["FullName"].ToString();
+                                //txtBirthDate.Text = dr["BirthDate"].ToString();
 
                                 ViewData["result"] = cmd.ExecuteNonQuery();
                                 con.Close();

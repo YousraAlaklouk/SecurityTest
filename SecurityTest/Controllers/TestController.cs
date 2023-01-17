@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using System.Data;
 
 namespace SecurityTest.Controllers
 {
@@ -226,5 +227,40 @@ namespace SecurityTest.Controllers
                 return View();
             }
         }
+        public ActionResult Welcome(Results r)
+        {
+            Results result = new Results();
+            DataSet ds = new DataSet();
+
+            using (SqlConnection con = new SqlConnection("Data Source=PRIYANKA\\SQLEXPRESS;Integrated Security=true;Initial Catalog=Sample"))
+            {
+                using (SqlCommand cmd = new SqlCommand("select * from customer where email = @Email", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@Email", SqlDbType.VarChar, 30).Value = Session["Email"].ToString();
+                    con.Open();
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    sda.Fill(ds);
+                    List<Enroll> userlist = new List<Enroll>();
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        Enroll uobj = new Enroll();
+                        uobj.ID = Convert.ToInt32(ds.Tables[0].Rows[i]["ID"].ToString());
+                        uobj.FullName = ds.Tables[0].Rows[i]["FullName"].ToString();
+                        uobj.Password = ds.Tables[0].Rows[i]["Password"].ToString();
+                        uobj.Email = ds.Tables[0].Rows[i]["Email"].ToString();
+                        uobj.Gender = ds.Tables[0].Rows[i]["Gender"].ToString();
+
+                        userlist.Add(uobj);
+
+                    }
+                    result.Enrollsinfo = userlist;
+                }
+                con.Close();
+
+            }
+            return View(user);
+        }
+
     }
 }//

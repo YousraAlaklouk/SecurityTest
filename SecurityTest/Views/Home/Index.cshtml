@@ -22,26 +22,40 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <img src="~/img/logo.png"style="width:70px; height:50px;"/>
-            <a class="navbar-brand" href="#login">Start Testing</a>
+            <img src="~/img/logo.png" style="width:70px; height:50px;" />
+            @if (Session["Email"] != null)
+            {
+                <a class="navbar-brand" href="@Url.Action("Welcome", "Test")">Start Testing</a>
+            }
+            else
+            {
+                <a class="navbar-brand" href="#login">Start Testing</a>
+            }
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
             </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
+
+            <div class="collapse navbar-collapse" id="navbarResponsive" runat="server">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#login">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#register">Register</a></li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Products","Test")">Our Products</a></li>
-
-
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("About", "Home")">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Products", "Test")">Our Products</a></li>
+                    @if (Session["Email"] != null)
+                    {
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("EditAccount", "Account")">Account</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Logout", "Home")">Log Out</a></li>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a class="nav-link" href="#login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#register">Register</a></li>
+                    }
                 </ul>
             </div>
         </div>
     </nav>
-    
+
     <!-- Masthead-->
     <header class="masthead">
         <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
@@ -78,7 +92,7 @@
 
                         The important thing is to choose a provider that ranks high in experience and expertise in security risk management. Our penetration testing services can help you to protect all aspects of information access, both technically and physically. Call us today <a href="@Url.Action("Contact","Home")" ">Here</a> to schedule a free consultation.
                     </p>
-                    <img class="img-fluid" src="/img/Home.jpeg"  alt="..." />
+                    <img class="img-fluid" src="/img/Home.jpeg" alt="..." />
 
                 </div>
             </div>
@@ -86,30 +100,30 @@
         </div>
     </section>
     <!-- Login and Register-->
-    <section class="projects-section bg-light" id="login">
-        <!-- Login-->
-        <section class="signup-section" style="color: white; background-image: url('../../img/demo-image-01.jpg');" id="login">
-            <div class="container px-4 px-lg-5" style="">
-                <div class="row gx-4 gx-lg-5">
-                    <div class="col-md-10 col-lg-8 mx-auto text-center">
-                        <h2 class="text-white mb-5">Login</h2>
-                        <div class="row input-group-newsletter">
-                            @using (Html.BeginForm("IndexLogin", "Home", FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
-                                <div class="form-group" style="margin-bottom:5px">
-                                    @Html.TextBoxFor(e => e.Email, new { @class = "form-control", placeholder = "Your Email *" })
-                                    @Html.ValidationMessageFor(e => e.Email)
-                                </div>
-                                <div class="form-group" style="margin-bottom:5px">
-                                    @Html.PasswordFor(e => e.Password, new { id = "password", @class = "form-control", placeholder = "Password *" })
-                                    <span id="result"></span>
-                                    @Html.ValidationMessageFor(e => e.Password)
-                                </div>
-                                <div class="form-group" style="margin-top:30px">
-                                    <div class="col-auto"><button class="btn btn-primary" id="submitButton" type="submit">Login!</button></div>
-                                </div>
-                                <script type="text/javascript">
+    @if (Session["Email"] == null)
+    {
+        <section class="projects-section bg-light" id="login">
+            <!-- Login-->
+            <section class="signup-section" style="color: white; background-image: url('../../img/demo-image-01.jpg');" id="login">
+                <div class="container px-4 px-lg-5" style="">
+                    <div class="row gx-4 gx-lg-5">
+                        <div class="col-md-10 col-lg-8 mx-auto text-center">
+                            <h2 class="text-white mb-5">Login</h2>
+                            <div class="row input-group-newsletter">
+                                @using (Html.BeginForm("IndexLogin", "Home", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-group" style="margin-bottom:5px">
+                                        @Html.TextBoxFor(e => e.Email, new { @class = "form-control", placeholder = "Your Email *" })
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:5px">
+                                        @Html.PasswordFor(e => e.Password, new { id = "password", @class = "form-control", placeholder = "Password *" })
+                                        <span id="result"></span>
+                                    </div>
+                                    <div class="form-group" style="margin-top:30px">
+                                        <div class="col-auto"><button class="btn btn-primary" id="Button" type="submit">Login!</button></div>
+                                    </div>
+                                    <script type="text/javascript">
 
                                         $(function () {
                                                 var msg = '@ViewData["result"]';
@@ -119,58 +133,59 @@
                                                     window.location.href = "@Url.Action("IndexLogin", "Home")";
                                                 }
                                             });
-                                </script>
-                            }
+                                    </script>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <br />
-        <!-- Register-->
-        <section class="register-section" style="color: white; background-image: url('../../img/demo-image-02.jpg'); " id="register">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5">
-                    <div class="col-md-10 col-lg-8 mx-auto text-center">
-                        <h2 class="text-white mb-5" style="color:black">Register</h2>
-                        <div class="row input-group-newsletter">
-                            @using (Html.BeginForm("Index", "Home", FormMethod.Post))
-                            {
-                                <div class="form-group" style="margin-bottom:5px">
-                                    @Html.TextBoxFor(e => e.UserName, new { @class = "form-control", placeholder = "UserName *" })
-                                    @Html.ValidationMessageFor(e => e.UserName)
-                                </div>
-                                <div class="form-group" style="margin-bottom:5px">
-                                    @Html.TextBoxFor(e => e.FullName, new { @class = "form-control", placeholder = "Full Name *" })
-                                    @Html.ValidationMessageFor(e => e.FullName)
-                                </div>
-                                <div class="form-group" style="margin-bottom:5px">
-                                    @Html.PasswordFor(e => e.Password, new { id = "password", @class = "form-control", placeholder = "Password *" })
-                                    <span id="result"></span>
-                                    @Html.ValidationMessageFor(e => e.Password)
-                                </div>
-                                <div class="form-group" style="margin-bottom:5px">
-                                    @Html.PasswordFor(e => e.Confirmpwd, new { @class = "form-control", placeholder = "Confirm Password *" })
-                                    @Html.ValidationMessageFor(e => e.Confirmpwd)
-                                </div>
-                                <div class="form-group" style="margin-bottom:5px">
-                                    @Html.TextBoxFor(e => e.Email, new { @class = "form-control", placeholder = "Your Email *" })
-                                    @Html.ValidationMessageFor(e => e.Email)
-                                </div>
-                                <div class="form-group" style="margin-bottom:5px">
-                                    @Html.TextBoxFor(e => e.BirthDate, new { @class = "form-control", placeholder = "Your BirthDate in  yyyy-mm-dd Form*" })
-                                    @Html.ValidationMessageFor(e => e.BirthDate)
-                                </div>
-                                <div class="form-group" style="margin-bottom:10px">
-                                    <div class="maxl">
-                                        @Html.RadioButtonFor(e => e.Gender, "Male", new { @class = "radio inline" })<span> Male </span>
-                                        @Html.RadioButtonFor(e => e.Gender, "Female", new { @class = "radio inline" })<span>Female </span>
+            </section>
+            <br />
+            <!-- Register-->
+            <section class="register-section" style="color: white; background-image: url('../../img/demo-image-02.jpg'); " id="register">
+                <div class="container px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5">
+                        <div class="col-md-10 col-lg-8 mx-auto text-center">
+                            <h2 class="text-white mb-5" style="color:black">Register</h2>
+                            <div class="row input-group-newsletter">
+                                @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                                {
+                                    <div class="form-group" style="margin-bottom:5px">
+
+                                        @Html.TextBoxFor(en => en.UserName, new { @class = "form-control", placeholder = "UserName *", })
+                                        @Html.ValidationMessageFor(en => en.UserName)
                                     </div>
-                                </div>
-                                <div class="form-group" style="margin-bottom:10px">
-                                    <div class="col-auto"><button class="btn btn-primary" id="submitButton" type="submit">Register!</button></div>
-                                </div>
-                                <script type="text/javascript">
+                                    <div class="form-group" style="margin-bottom:5px">
+                                        @Html.TextBoxFor(en => en.FullName, new { @class = "form-control", placeholder = "Full Name *" })
+                                        @Html.ValidationMessageFor(en => en.FullName)
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:5px">
+                                        @Html.PasswordFor(en => en.Password, new { id = "password", @class = "form-control", placeholder = "Password *" })
+                                        <span id="result"></span>
+                                        @Html.ValidationMessageFor(en => en.Password)
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:5px">
+                                        @Html.PasswordFor(en => en.Confirmpwd, new { @class = "form-control", placeholder = "Confirm Password *" })
+                                        @Html.ValidationMessageFor(en => en.Confirmpwd)
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:5px">
+                                        @Html.TextBoxFor(en => en.Email, new { @class = "form-control", placeholder = "Your Email *" })
+                                        @Html.ValidationMessageFor(en => en.Email)
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:5px">
+                                        @Html.TextBoxFor(en => en.BirthDate, new { @class = "form-control", placeholder = "Your BirthDate in  yyyy-mm-dd Form*" })
+                                        @Html.ValidationMessageFor(en => en.BirthDate)
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:10px">
+                                        <div class="maxl">
+                                            @Html.RadioButtonFor(en => en.Gender, "Male", new { @class = "radio inline" })<span> Male </span>
+                                            @Html.RadioButtonFor(en => en.Gender, "Female", new { @class = "radio inline" })<span>Female </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="margin-bottom:10px">
+                                        <div class="col-auto"><button class="btn btn-primary" id="submitButton" type="submit">Register!</button></div>
+                                    </div>
+                                    <script type="text/javascript">
 
                                             $(function () {
                                             var msg = '@ViewData["result"]';
@@ -180,15 +195,18 @@
                                                 window.location.href = "@Url.Action("Index", "Home")";
                                                 }
                                             });
-                                </script>
-                            }
+                                    </script>
+                                    @section Scripts {
+                                        @Scripts.Render("~/bundles/jqueryval")
+                                    }
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </section>
-    </section>
-
+    }
     <!-- Footer-->
     <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; SECURITYS&Y 2022</div></footer>
     <!-- Bootstrap core JS-->

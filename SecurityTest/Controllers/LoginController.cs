@@ -27,7 +27,7 @@ namespace SecurityTest.Controllers
         {
             //String SqlCon = ConfigurationManager.ConnectionStrings["ConnDB"].ConnectionString;
             SqlConnection con = new SqlConnection("Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True");
-            string SqlQuery = "select Email,Password from Enrollment where Email=@Email and Password=@Password";
+            string SqlQuery = "select Email,Password from Customer where Email=@Email and Password=@Password";
             con.Open();
             SqlCommand cmd = new SqlCommand(SqlQuery, con); ;
             cmd.Parameters.AddWithValue("@Email", e.Email);
@@ -36,7 +36,7 @@ namespace SecurityTest.Controllers
             if (sdr.Read())
             {
                 Session["Email"] = e.Email.ToString();
-                return RedirectToAction("Welcome");
+                return View("Home");
                 e.Email = email;
 
             }
@@ -55,7 +55,7 @@ namespace SecurityTest.Controllers
             }
 
             con.Close();
-            return View();
+            return View("Home");
             //return new JsonResult { Data = new { status = status } };  
         }
 
@@ -77,17 +77,14 @@ namespace SecurityTest.Controllers
                     List<Enroll> userlist = new List<Enroll>();
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
-                        /*Enroll uobj = new Enroll();
+                        Enroll uobj = new Enroll();
                         uobj.ID = Convert.ToInt32(ds.Tables[0].Rows[i]["ID"].ToString());
-                        uobj.FirstName = ds.Tables[0].Rows[i]["FirstName"].ToString();
-                        uobj.LastName = ds.Tables[0].Rows[i]["LastName"].ToString();
+                        uobj.FullName = ds.Tables[0].Rows[i]["FullName"].ToString();
                         uobj.Password = ds.Tables[0].Rows[i]["Password"].ToString();
                         uobj.Email = ds.Tables[0].Rows[i]["Email"].ToString();
-                        uobj.PhoneNumber = ds.Tables[0].Rows[i]["Phone"].ToString();
-                        uobj.SecurityAnwser = ds.Tables[0].Rows[i]["SecurityAnwser"].ToString();
                         uobj.Gender = ds.Tables[0].Rows[i]["Gender"].ToString();
 
-                        userlist.Add(uobj);*/
+                        userlist.Add(uobj);
 
                     }
                     user.Enrollsinfo = userlist;
