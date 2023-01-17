@@ -21,11 +21,44 @@ namespace SecurityTest.Controllers
         {
             return View();
         }
-        public string value = "";
+        public ActionResult UpdateAccount(Enroll e)
+        {
+            try
+            {
+                if (Request.HttpMethod == "POST")
+                {
+                    Enroll er = new Enroll();
+                    using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
+                    {
+                        using (SqlCommand cmd = new SqlCommand("UPDATE Customer SET FullName  = '" + e.FullName.Trim() + "', BirthDate ='" + e.BirthDate.Trim() + "', Gender = @gender WHERE Email = @email ", con))
+                        {
+                            cmd.Parameters.AddWithValue("@em", HomeController.email);
+                            con.Open();
+                            ViewData["result"] = cmd.ExecuteNonQuery();
+                            con.Close();
+                        }
+
+                    }
+                }
+                return View();
+
+            }
+
+            catch (SqlException ee)
+            {
+                MessageBox.Show(ee.Message);
+                return View();
+            }
+
+}
+
+public string value = "";
 
         [HttpPost]
         public ActionResult Account(Enroll e)
         {
+/*            string female = "Female";
+            string male = "Male";*/
             try
             {
                 if (Request.HttpMethod == "POST")
@@ -44,13 +77,51 @@ namespace SecurityTest.Controllers
                             dr = cmd.ExecuteReader();
                             if (dr.Read())
                             {
-                                //txtUserName.Text = dr["UserName"].ToString();
-                                //txtFullName.Text = dr["FullName"].ToString();
-                                //txtBirthDate.Text = dr["BirthDate"].ToString();
+                                e.Email = dr["Email"].ToString();
+                                e.UserName = dr["UserName"].ToString();
 
-                                ViewData["result"] = cmd.ExecuteNonQuery();
+                                e.FullName = dr["FullName"].ToString();
+                                e.BirthDate = dr["BirthDate"].ToString();
+                                e.Password = dr["Password"].ToString();
+
                                 con.Close();
+
+
+
+                                /*
+                                                            if (dr["Gender"].ToString().Trim() == female)
+                                                            {
+                                                                    List<SelectListItem> items = PopulateFruits();
+                                                                    var selectedItem = items.Find(p => p.Value == fruit);
+                                                                    if (selectedItem != null)
+                                                                    {
+                                                                        selectedItem.Selected = true;
+                                                                    }
+                                                            else if (dr["Gender"].ToString().Trim() == male)
+                                                            {
+                                                                Male.Checked = true;
+                                                                Female.Checked = false;
+
+                                                                NotToSay.Checked = false;
+                                                            }
+                                                            else if (dr["Gender"].ToString().Trim() == "Rether Not To Say")
+                                                            {
+                                                                Female.Checked = false;
+                                                                Male.Checked = false;
+                                                                NotToSay.Checked = true;
+
+                                                            }*/
+
+                                Response.Write("<script>alert('sucsseful ');</script>");
+
                             }
+                            else
+                            {
+                                Response.Write("<script>alert('couldnt load data');</script>");
+
+                            }
+
+
                         }
                     }
                 }
@@ -62,8 +133,8 @@ namespace SecurityTest.Controllers
                 MessageBox.Show(ee.Message);
                 return View();
             }
-
         }
+
 
     }
 }
