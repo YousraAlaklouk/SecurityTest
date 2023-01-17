@@ -23,18 +23,34 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container px-4 px-lg-5">
             <img src="~/img/logo.png" style="width:70px; height:50px;" />
-
-            @*<a class="navbar-brand" href="@Url.Action("Index","Home")#login">Start Testing</a>
+            @if (Session["Email"] != null)
+            {
+                <a class="navbar-brand" href="@Url.Action("Welcome", "Test")">Start Testing</a>
+            }
+            else
+            {
+                <a class="navbar-brand" href="#login">Start Testing</a>
+            }
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
             </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About Us</a></li>*@
 
+            <div class="collapse navbar-collapse" id="navbarResponsive" runat="server">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact", "Home")">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("About", "Home")">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Products", "Test")">Our Products</a></li>
+                    @if (Session["Email"] != null)
+                    {
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("EditAccount", "Account")">Account</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Logout", "Home")">Log Out</a></li>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a class="nav-link" href="#login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#register">Register</a></li>
+                    }
                 </ul>
             </div>
         </div>
@@ -50,7 +66,7 @@
             </div>
         </div>
     </header>
-    <section class="register-section" style="color: white; background-image: url('../../img/demo-image-02.jpg'); " id="register">
+    <section class="register-section" style="color: white; background-image: url('../../img/demo-image-02.jpg'); " >
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5">
                 <div class="col-md-10 col-lg-8 mx-auto text-center">
@@ -58,37 +74,37 @@
                     <div class="row input-group-newsletter">
                         @using (Html.BeginForm("Account", "Account", FormMethod.Post))
 
-                        
+
                         {
                             using (Html.BeginForm("UpdateAccount", "Account", FormMethod.Post))
                             {
                                 <div class="form-group" style="margin-bottom:5px">
-                                    @Html.TextBoxFor(e => e.UserName, new { @class = "form-control", placeholder = "UserName *", @readonly = "readonly" })
+                                    @Html.TextBoxFor(e => e.UserName, new { @class = "form-control", placeholder = "UserName *" })
                                 </div>
-                        <div class="form-group" style="margin-bottom:5px">
-                            @Html.TextBoxFor(e => e.FullName, new { @class = "form-control", placeholder = "Full Name *" })
-                        </div>
-                        <div class="form-group" style="margin-bottom:5px">
-                            @Html.TextBoxFor(e => e.Password, new { id = "password", @class = "form-control", placeholder = "Password *", @readonly = "readonly" })
-                            <span id="result"></span>
-                        </div>
+                                <div class="form-group" style="margin-bottom:5px">
+                                    @Html.TextBoxFor(e => e.FullName, new { @class = "form-control", placeholder = "Full Name *" })
+                                </div>
+                                <div class="form-group" style="margin-bottom:5px">
+                                    @Html.TextBoxFor(e => e.Password, new { id = "password", @class = "form-control", placeholder = "Password *", @readonly = "readonly" })
+                                    <span id="result"></span>
+                                </div>
 
-                        <div class="form-group" style="margin-bottom:5px">
-                            @Html.TextBoxFor(e => e.Email, new { @class = "form-control", placeholder = "Your Email *", @readonly = "readonly" })
-                        </div>
-                        <div class="form-group" style="margin-bottom:5px">
-                            @Html.TextBoxFor(e => e.BirthDate, new { @class = "form-control", placeholder = "Your BirthDate in  yyyy-mm-dd Form*" })
-                        </div>
-                        <div class="form-group" style="margin-bottom:10px">
-                            <div class="maxl">
-                                @Html.RadioButtonFor(en => en.Gender, "Male", new { @class = "radio inline" })<span> Male </span>
-                                @Html.RadioButtonFor(en => en.Gender, "Female", new { @class = "radio inline" })<span>Female </span>
-                            </div>
-                        </div>
-                        <div class="form-group" style="margin-bottom:10px">
-                            <div class="col-auto"><button class="btn btn-primary" id="submitButton" type="submit">Update!</button></div>
-                        </div>
-                        <script type="text/javascript">
+                                <div class="form-group" style="margin-bottom:5px">
+                                    @Html.TextBoxFor(e => e.Email, new { @class = "form-control", placeholder = "Your Email *", @readonly = "readonly" })
+                                </div>
+                                <div class="form-group" style="margin-bottom:5px">
+                                    @Html.TextBoxFor(e => e.BirthDate, new { @class = "form-control", placeholder = "Your BirthDate in  yyyy-mm-dd Form*" })
+                                </div>
+                                <div class="form-group" style="margin-bottom:10px">
+                                    <div class="maxl">
+                                        @Html.RadioButtonFor(en => en.Gender, "Male", new { @class = "radio inline" })<span> Male </span>
+                                        @Html.RadioButtonFor(en => en.Gender, "Female", new { @class = "radio inline" })<span>Female </span>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom:10px">
+                                    <div class="col-auto"><button class="btn btn-primary" id="submitButton" type="submit">Update!</button></div>
+                                </div>
+                                <script type="text/javascript">
 
                                             $(function () {
                                             var msg = '@ViewData["result"]';
@@ -98,9 +114,9 @@
                                                 window.location.href = "@Url.Action("Index", "Home")";
                                                 }
                                             });
-                        </script>
-                                }
+                                </script>
                             }
+                        }
                     </div>
                 </div>
             </div>

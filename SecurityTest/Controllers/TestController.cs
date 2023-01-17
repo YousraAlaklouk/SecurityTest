@@ -227,7 +227,7 @@ namespace SecurityTest.Controllers
                 return View();
             }
         }
-        public ActionResult Welcome(Results r)
+/*        public ActionResult Welcome(Results r)
         {
             Results result = new Results();
             DataSet ds = new DataSet();
@@ -261,6 +261,6 @@ namespace SecurityTest.Controllers
             }
             return View(user);
         }
-
+*/
     }
 }//
