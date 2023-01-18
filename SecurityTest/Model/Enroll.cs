@@ -40,10 +40,13 @@ namespace SecurityTest.Model
         [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail id is not valid")]
         public string Email { get; set; }
 
-        [DataType(DataType.Date)]
-        [Display(Name = "BirthDate")]
+/*        [DataType(DataType.Date)]
+*/        [Display(Name = "BirthDate")]
+
         [Required(ErrorMessage = "BirthDate Required!!")]
-        public string BirthDate { get; set; }
+        public string BirthDate { get; set; } 
+
+
 
 
         public List<Enroll> Enrollsinfo { get; set; }

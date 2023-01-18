@@ -13,7 +13,7 @@
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FullName" Type="nvarchar" MaxLength="50" />
-          <Property Name="BirthDate" Type="date" />
+          <Property Name="BirthDate" Type="nvarchar" MaxLength="30" />
           <Property Name="Gender" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -33,11 +33,11 @@
           <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="BirthDate" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityContainer Name="SecurityEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SecurityEn" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Customers" EntityType="Self.Customer" />
         </EntityContainer>
       </Schema>
@@ -45,7 +45,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SecuritySYModelStoreContainer" CdmEntityContainer="SecurityEntities">
+        <EntityContainerMapping StorageEntityContainer="SecuritySYModelStoreContainer" CdmEntityContainer="SecurityEn">
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="SecuritySYModel.Customer">
               <MappingFragment StoreEntitySet="Customer">

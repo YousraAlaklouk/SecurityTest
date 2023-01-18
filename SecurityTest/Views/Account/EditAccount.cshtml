@@ -66,43 +66,94 @@
             </div>
         </div>
     </header>
-    <section class="register-section" style="color: white; background-image: url('../../img/demo-image-02.jpg'); " >
+    <h2 class="text-white mb-4">Prfile Data</h2>
+    <br />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th></th>
+        </tr>Gender
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.BirthDate)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Gender)
+        </td>
+    </tr>
+        }
+
+    </table>
+
+    <section class="register-section" style="color: white; background-image: url('../../img/demo-image-02.jpg'); ">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5">
                 <div class="col-md-10 col-lg-8 mx-auto text-center">
                     <h2 class="text-white mb-5" style="color:black">Account Update</h2>
                     <div class="row input-group-newsletter">
 
-                                using (Html.BeginForm("UpdateAccount", "Account", FormMethod.Post))
-                                {
-                                    <div class="form-group" style="margin-bottom:5px">
+                        @using (Html.BeginForm("UpdateAccount", "Account", FormMethod.Post))
+                        {
+                            <div class="form-group" style="margin-bottom:5px">
 
-                                        @Html.TextBoxFor(e => e.UserName, new { @class = "form-control", placeholder = "UserName *" })
-                                    </div>
-                                    <div class="form-group" style="margin-bottom:5px">
-                                        @Html.TextBoxFor(e => e.FullName, new { @class = "form-control", placeholder = "Full Name *" })
-                                    </div>
-                                    <div class="form-group" style="margin-bottom:5px">
-                                        @Html.TextBoxFor(e => e.Password, new { id = "password", @class = "form-control", placeholder = "Password *", @readonly = "readonly" })
-                                        <span id="result"></span>
-                                    </div>
+                                @Html.TextBoxFor(e => e.UserName, new { @class = "form-control", placeholder = "UserName *" })
+                            </div>
+                            <div class="form-group" style="margin-bottom:5px">
+                                @Html.TextBoxFor(e => e.FullName, new { @class = "form-control", placeholder = "Full Name *" })
+                            </div>
+                            <div class="form-group" style="margin-bottom:5px">
+                                @Html.TextBoxFor(e => e.Password, new { id = "password", @class = "form-control", placeholder = "Password *", @readonly = "readonly" })
+                                <span id="result"></span>
+                            </div>
 
-                                    <div class="form-group" style="margin-bottom:5px">
-                                        @Html.TextBoxFor(e => e.Email, new { @class = "form-control", placeholder = "Your Email *", @readonly = "readonly" })
-                                    </div>
-                                    <div class="form-group" style="margin-bottom:5px">
-                                        @Html.TextBoxFor(e => e.BirthDate, new { @class = "form-control", placeholder = "Your BirthDate in  yyyy-mm-dd Form*" })
-                                    </div>
-                                    <div class="form-group" style="margin-bottom:10px">
-                                        <div class="maxl">
-                                            @Html.RadioButtonFor(en => en.Gender, "Male", new { @class = "radio inline" })<span> Male </span>
-                                            @Html.RadioButtonFor(en => en.Gender, "Female", new { @class = "radio inline" })<span>Female </span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group" style="margin-bottom:10px">
-                                        <div class="col-auto"><button class="btn btn-primary" id="submitButton" type="submit">Update!</button></div>
-                                    </div>
-                                    <script type="text/javascript">
+                            <div class="form-group" style="margin-bottom:5px">
+                                @Html.TextBoxFor(e => e.Email, new { @class = "form-control", placeholder = "Your Email *", @readonly = "readonly" })
+                            </div>
+                            <div class="form-group" style="margin-bottom:5px">
+                                @Html.TextBoxFor(e => e.BirthDate, new { @class = "form-control", placeholder = "Your BirthDate in  yyyy-mm-dd Form*" })
+                            </div>
+                            <div class="form-group" style="margin-bottom:10px">
+                                <div class="maxl">
+                                    @Html.RadioButtonFor(e => e.Gender, "Male", new { @class = "radio inline" })<span> Male </span>
+                                    @Html.RadioButtonFor(e => e.Gender, "Female", new { @class = "radio inline" })<span>Female </span>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-bottom:10px">
+                                <div class="col-auto"><button class="btn btn-primary" id="submitButton" type="submit">Update!</button></div>
+                            </div>
+                            <script type="text/javascript">
 
                                             $(function () {
                                             var msg = '@ViewData["result"]';
@@ -112,10 +163,10 @@
                                                 window.location.href = "@Url.Action("Index", "Home")";
                                                 }
                                             });
-                                    </script>
-                                }
-                            }
-                        </div>
+                            </script>
+                        }
+                        }
+                    </div>
                 </div>
             </div>
         </div>

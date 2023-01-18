@@ -13,10 +13,10 @@ namespace SecurityTest
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class SecurityEntities : DbContext
+    public partial class SecurityEn : DbContext
     {
-        public SecurityEntities()
-            : base("name=SecurityEntities")
+        public SecurityEn()
+            : base("name=SecurityEn")
         {
         }
     

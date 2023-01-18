@@ -10,20 +10,24 @@ using System.IO;
 using System.Windows;
 using System.Data;
 using Dapper;
+using System.Configuration;
 
 namespace SecurityTest.Controllers
 {
     public class AccountController : Controller
     {
         string email = HomeController.email;
-        SecurityEntities db;
         // GET: EditProfile
         public ActionResult EditAccount()
         {
-            db = new SecurityEntities();
-            List<Customer> customers = db.Customers.ToList();
+            List<Customer> wow = new List<Customer>();
+            using (IDbConnection db = new SqlConnection("Data Source=DESKTOP-CNJT2HB\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
+            {
 
-            return View(customers.Find(p => p.Email == Session["Email"].ToString()));
+                wow = db.Query<Customer>("SELECT * FROM Customer WHERE Email = '" + Session["Email"].ToString() + "'").ToList();
+
+            }
+            return View(wow);
         }
         public ActionResult UpdateAccount(Enroll e)
         {

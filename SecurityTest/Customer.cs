@@ -18,7 +18,7 @@ namespace SecurityTest
         public string Username { get; set; }
         public string Email { get; set; }
         public string FullName { get; set; }
-        public Nullable<System.DateTime> BirthDate { get; set; }
+        public string BirthDate { get; set; }
         public string Gender { get; set; }
         public string Password { get; set; }
     }
