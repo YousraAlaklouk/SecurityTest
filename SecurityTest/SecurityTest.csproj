@@ -239,6 +239,7 @@
     <Content Include="Views\Test\Test.cshtml" />
     <Content Include="Views\Test\Products.cshtml" />
     <Content Include="Views\Account\EditAccount.cshtml" />
+    <Content Include="Views\Test\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

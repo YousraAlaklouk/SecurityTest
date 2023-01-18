@@ -22,7 +22,7 @@ namespace SecurityTest.Controllers
         public ActionResult Index()
         {
             List<Results> FriendList = new List<Results>();
-            using (IDbConnection db = new SqlConnection("Data Source=DESKTOP-CNJT2HB\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
+            using (IDbConnection db = new SqlConnection("Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
             {
 
                 FriendList = db.Query<Results>("Select * From Result R inner join Customer C on C.CustomerID = R.CustomerID where C.Email = '"+Session["Email"].ToString()+"'").ToList();
@@ -43,7 +43,7 @@ namespace SecurityTest.Controllers
         public string GetData(string query)
         {
             string id = "";
-            string connectionString = "Data Source=DESKTOP-CNJT2HB\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True";
+            string connectionString = "Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
@@ -84,7 +84,7 @@ namespace SecurityTest.Controllers
                 if (Request.HttpMethod == "POST")
                 {
                     Results test = new Results();
-                    using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-CNJT2HB\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
+                    using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
                     {
                         using (SqlCommand cmd = new SqlCommand("INSERT INTO Result (TestID,CustomerID,Result,State) VALUES ('T1136.001'," + GetData("select CustomerID from Customer where Email = '" + Session["Email"].ToString() + "'")+ ", 'Test has succeeded a new user with the username #(username) and password #(password) has been created' , 1)", con))
                         {
@@ -126,7 +126,7 @@ namespace SecurityTest.Controllers
                 if (Request.HttpMethod == "POST")
                 {
                     Results test = new Results();
-                    using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-CNJT2HB\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
+                    using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
                     {
                         using (SqlCommand cmd = new SqlCommand("update Result set State = 0 where ID =" + GetData("select ID from Result where TestID = 'T1136.001' and CustomerID = " + GetData("select CustomerID from Customer where Email = '" + Session["Email"].ToString() + "'")), con))
                         {
@@ -136,7 +136,6 @@ namespace SecurityTest.Controllers
                         }
                     }
                 }
-                
 
                 return RedirectToAction("Index");
             }
@@ -153,7 +152,7 @@ namespace SecurityTest.Controllers
         public bool ReadData(string query)
         {
             bool check = false;
-            string connectionString = "Data Source=DESKTOP-CNJT2HB\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True";
+            string connectionString = "Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(query, connection);
@@ -210,7 +209,7 @@ namespace SecurityTest.Controllers
                     if (Request.HttpMethod == "POST")
                     {
                         Results test = new Results();
-                        using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-CNJT2HB\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
+                        using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
                         {
                             using (SqlCommand cmd = new SqlCommand("INSERT INTO Result (TestID,CustomerID,Result,State) VALUES ('T1115'," + GetData("select CustomerID from Customer where Email = '" + Session["Email"].ToString() + "'") + ", 'A new T" + id + ".txt file has been created and can be found in %temp% file',1)", con))
                             {
@@ -247,35 +246,44 @@ namespace SecurityTest.Controllers
                     Results result = new Results();
                     DataSet ds = new DataSet();
 
-            using (SqlConnection con = new SqlConnection("Data Source=PRIYANKA\\SQLEXPRESS;Integrated Security=true;Initial Catalog=Sample"))
-            {
-                using (SqlCommand cmd = new SqlCommand("select * from customer where email = @Email", con))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@Email", SqlDbType.VarChar, 30).Value = Session["Email"].ToString();
-                    con.Open();
-                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                    sda.Fill(ds);
-                    List<Enroll> userlist = new List<Enroll>();
-                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    using (SqlConnection con = new SqlConnection("Data Source=PRIYANKA\\SQLEXPRESS;Integrated Security=true;Initial Catalog=Sample"))
                     {
-                        Enroll uobj = new Enroll();
-                        uobj.ID = Convert.ToInt32(ds.Tables[0].Rows[i]["ID"].ToString());
-                        uobj.FullName = ds.Tables[0].Rows[i]["FullName"].ToString();
-                        uobj.Password = ds.Tables[0].Rows[i]["Password"].ToString();
-                        uobj.Email = ds.Tables[0].Rows[i]["Email"].ToString();
-                        uobj.Gender = ds.Tables[0].Rows[i]["Gender"].ToString();
+                        using (SqlCommand cmd = new SqlCommand("select * from customer where email = @Email", con))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.Add("@Email", SqlDbType.VarChar, 30).Value = Session["Email"].ToString();
+                            con.Open();
+                            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                            sda.Fill(ds);
+                            List<Enroll> userlist = new List<Enroll>();
+                            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                            {
+                                Enroll uobj = new Enroll();
+                                uobj.ID = Convert.ToInt32(ds.Tables[0].Rows[i]["ID"].ToString());
+                                uobj.FullName = ds.Tables[0].Rows[i]["FullName"].ToString();
+                                uobj.Password = ds.Tables[0].Rows[i]["Password"].ToString();
+                                uobj.Email = ds.Tables[0].Rows[i]["Email"].ToString();
+                                uobj.Gender = ds.Tables[0].Rows[i]["Gender"].ToString();
 
-                        userlist.Add(uobj);
+                                userlist.Add(uobj);
+
+                            }
+                            result.Enrollsinfo = userlist;
+                        }
+                        con.Close();
 
                     }
-                    result.Enrollsinfo = userlist;
+                    return View(user);
                 }
-                con.Close();
+        */
 
-            }
-            return View(user);
+        public ActionResult ViewHistory()
+        {
+            ViewBag.Message = "Hsitory List";
+
+            //var data = LoadHistory();
+
+            return View();
         }
-*/
     }
 }//
