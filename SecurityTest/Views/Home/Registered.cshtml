@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <link href="~/Content/Registered.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div>
+        <div>
+            <p>You are one of our <strong>Family</strong> now</p>
+
+        </div>
+
+        <script src="~/Scripts/Registered.js"></script>
+        <script>
+            setTimeout(function () {
+                window.location.href = '@Url.Action("Index", "Home")'; // the redirect goes here
+
+            }, 5000);
+        </script>
+
+    </div>
+</body>
+</html>

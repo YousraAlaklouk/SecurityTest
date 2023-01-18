@@ -19,6 +19,10 @@ namespace SecurityTest.Controllers
         {
             return View();
         }
+        public ActionResult Registered()
+        {
+            return View();
+        }
 
         public ActionResult About()
         {

@@ -179,7 +179,7 @@
                                     <div class="form-group" style="margin-bottom:10px">
                                         <div class="maxl">
                                             @Html.RadioButtonFor(en => en.Gender, "Male", new { @class = "radio inline" })<span> Male </span>
-                                            @Html.RadioButtonFor(en => en.Gender, "Female", new { @class = "radio inline"  })<span>Female </span>
+                                            @Html.RadioButtonFor(en => en.Gender, "Female", new { @class = "radio inline" })<span>Female </span>
                                         </div>
                                     </div>
                                     <div class="form-group" style="margin-bottom:10px">
@@ -192,7 +192,7 @@
                                             if (msg == '1')
                                             {
                                                 alert("User Details Inserted Successfully");
-                                                window.location.href = "@Url.Action("Index", "Home")";
+                                                window.location.href = "@Url.Action("Registered", "Home")";
                                                 }
                                             });
                                     </script>
@@ -207,6 +207,9 @@
             </section>
         </section>
     }
+
+
+    </script>
     <!-- Footer-->
     <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; SECURITYS&Y 2022</div></footer>
     <!-- Bootstrap core JS-->
@@ -220,4 +223,5 @@
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
+
 </html>
