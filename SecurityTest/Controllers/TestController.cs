@@ -9,6 +9,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Data;
+using Dapper;
+using System.Configuration;
 
 namespace SecurityTest.Controllers
 {
@@ -16,10 +18,24 @@ namespace SecurityTest.Controllers
     {
         string email = HomeController.email;
         // GET: Test
+
+        public ActionResult Index()
+        {
+            List<Results> FriendList = new List<Results>();
+            using (IDbConnection db = new SqlConnection("Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
+            {
+
+                FriendList = db.Query<Results>("Select * From Result R inner join Customer C on C.CustomerID = R.CustomerID where C.Email = '"+Session["Email"].ToString()+"'").ToList();
+                
+            }
+            return View(FriendList);
+        }
+
         public ActionResult Test()
         {
             return View();
         }
+
         public ActionResult Products()
         {
             return View();
@@ -70,7 +86,7 @@ namespace SecurityTest.Controllers
                     Results test = new Results();
                     using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
                     {
-                        using (SqlCommand cmd = new SqlCommand("INSERT INTO Result (TestID,CustomerID,Result,State) VALUES ('T1136.001'," + GetData("select CustomerID from Customer where UserName = '" + HomeController.email + "' or Email = '" + HomeController.email + "'") + ", 'Test has succeeded a new user with the username #(username) and password #(password) has been created' , 1)", con))
+                        using (SqlCommand cmd = new SqlCommand("INSERT INTO Result (TestID,CustomerID,Result,State) VALUES ('T1136.001'," + GetData("select CustomerID from Customer where Email = '" + Session["Email"].ToString() + "'")+ ", 'Test has succeeded a new user with the username #(username) and password #(password) has been created' , 1)", con))
                         {
 
 
@@ -81,13 +97,13 @@ namespace SecurityTest.Controllers
                     }
                 }
 
-                return View("Test");
+                return RedirectToAction("Index");
             }
 
             catch (SqlException ee)
             {
                 Response.Write("<script>alert('" + ee + "');</script>");
-                return View("Test");
+                return RedirectToAction("Index");
             }
         }
 
@@ -112,10 +128,8 @@ namespace SecurityTest.Controllers
                     Results test = new Results();
                     using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
                     {
-                        using (SqlCommand cmd = new SqlCommand("update Result set State = 0 where ID =" + GetData("select ID from Result where TestID = 'T1136.001' and CustomerID = " + GetData("select CustomerID from Customer where UserName = '" + HomeController.email + "' or Email = '" + HomeController.email + "'")), con))
+                        using (SqlCommand cmd = new SqlCommand("update Result set State = 0 where ID =" + GetData("select ID from Result where TestID = 'T1136.001' and CustomerID = " + GetData("select CustomerID from Customer where Email = '" + Session["Email"].ToString() + "'")), con))
                         {
-
-
                             con.Open();
                             ViewData["result"] = cmd.ExecuteNonQuery();
                             con.Close();
@@ -123,7 +137,7 @@ namespace SecurityTest.Controllers
                     }
                 }
 
-                return View();
+                return RedirectToAction("Index");
             }
 
 
@@ -132,7 +146,7 @@ namespace SecurityTest.Controllers
             catch (SqlException ee)
             {
                 Response.Write("<script>alert('" + ee + "');</script>");
-                return View();
+                return RedirectToAction("Index");
             }
         }
         public bool ReadData(string query)
@@ -197,7 +211,7 @@ namespace SecurityTest.Controllers
                         Results test = new Results();
                         using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
                         {
-                            using (SqlCommand cmd = new SqlCommand("INSERT INTO Result (TestID,CustomerID,Result,State) VALUES ('T1115'," + GetData("select CustomerID from Customer where UserName = '" + HomeController.email + "' or Email = '" + HomeController.email + "'") + ", 'A new T" + id + ".txt file has been created and can be found in %temp% file',1)", con))
+                            using (SqlCommand cmd = new SqlCommand("INSERT INTO Result (TestID,CustomerID,Result,State) VALUES ('T1115'," + GetData("select CustomerID from Customer where Email = '" + Session["Email"].ToString() + "'") + ", 'A new T" + id + ".txt file has been created and can be found in %temp% file',1)", con))
                             {
 
 
@@ -209,12 +223,12 @@ namespace SecurityTest.Controllers
                         }
                     }
 
-                    return View();
+                    return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
                     Response.Write("<script>alert('" + ex + "');</script>");
-                    return View();
+                    return RedirectToAction("Index");
                 }
 
 
@@ -224,43 +238,52 @@ namespace SecurityTest.Controllers
             catch (SqlException ee)
             {
                 Response.Write("<script>alert('" + ee + "');</script>");
-                return View();
+                return RedirectToAction("Index");
             }
         }
-/*        public ActionResult Welcome(Results r)
-        {
-            Results result = new Results();
-            DataSet ds = new DataSet();
-
-            using (SqlConnection con = new SqlConnection("Data Source=PRIYANKA\\SQLEXPRESS;Integrated Security=true;Initial Catalog=Sample"))
-            {
-                using (SqlCommand cmd = new SqlCommand("select * from customer where email = @Email", con))
+        /*        public ActionResult Welcome(Results r)
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@Email", SqlDbType.VarChar, 30).Value = Session["Email"].ToString();
-                    con.Open();
-                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
-                    sda.Fill(ds);
-                    List<Enroll> userlist = new List<Enroll>();
-                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                    {
-                        Enroll uobj = new Enroll();
-                        uobj.ID = Convert.ToInt32(ds.Tables[0].Rows[i]["ID"].ToString());
-                        uobj.FullName = ds.Tables[0].Rows[i]["FullName"].ToString();
-                        uobj.Password = ds.Tables[0].Rows[i]["Password"].ToString();
-                        uobj.Email = ds.Tables[0].Rows[i]["Email"].ToString();
-                        uobj.Gender = ds.Tables[0].Rows[i]["Gender"].ToString();
+                    Results result = new Results();
+                    DataSet ds = new DataSet();
 
-                        userlist.Add(uobj);
+                    using (SqlConnection con = new SqlConnection("Data Source=PRIYANKA\\SQLEXPRESS;Integrated Security=true;Initial Catalog=Sample"))
+                    {
+                        using (SqlCommand cmd = new SqlCommand("select * from customer where email = @Email", con))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.Add("@Email", SqlDbType.VarChar, 30).Value = Session["Email"].ToString();
+                            con.Open();
+                            SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                            sda.Fill(ds);
+                            List<Enroll> userlist = new List<Enroll>();
+                            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                            {
+                                Enroll uobj = new Enroll();
+                                uobj.ID = Convert.ToInt32(ds.Tables[0].Rows[i]["ID"].ToString());
+                                uobj.FullName = ds.Tables[0].Rows[i]["FullName"].ToString();
+                                uobj.Password = ds.Tables[0].Rows[i]["Password"].ToString();
+                                uobj.Email = ds.Tables[0].Rows[i]["Email"].ToString();
+                                uobj.Gender = ds.Tables[0].Rows[i]["Gender"].ToString();
+
+                                userlist.Add(uobj);
+
+                            }
+                            result.Enrollsinfo = userlist;
+                        }
+                        con.Close();
 
                     }
-                    result.Enrollsinfo = userlist;
+                    return View(user);
                 }
-                con.Close();
+        */
 
-            }
-            return View(user);
+        public ActionResult ViewHistory()
+        {
+            ViewBag.Message = "Hsitory List";
+
+            //var data = LoadHistory();
+
+            return View();
         }
-*/
     }
 }//

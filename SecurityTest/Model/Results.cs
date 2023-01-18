@@ -12,7 +12,7 @@ namespace SecurityTest.Model
         public int ID { get; set; }
 
         [Display(Name = "TestID")]
-        public int TestID { get; set; }
+        public string TestID { get; set; }
 
         [Display(Name = "CustomerID")]
         public int CustomerID { get; set; }
