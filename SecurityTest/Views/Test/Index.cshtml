@@ -28,7 +28,7 @@
 
             @if (Session["Email"] == null)
             {
-                <a class="navbar-brand" href="@Url.Action("Index","Home")#login">Start Testing</a>
+            <a class="navbar-brand" href="@Url.Action("Index","Home")#login">Start Testing</a>
             }
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
@@ -43,13 +43,13 @@
 
                     @if (Session["Email"] != null)
                     {
-                        <li class="nav-item"><a class="nav-link" href="@Url.Action("EditAccount", "Account")">Account</a></li>
-                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Logout", "Home")">Log Out</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("EditAccount", "Account")">Account</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Logout", "Home")">Log Out</a></li>
                     }
                     else
                     {
-                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")#login">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")#register">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")#login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")#register">Register</a></li>
                     }
 
                 </ul>
@@ -79,17 +79,17 @@
                             <td>
                                 @using (Html.BeginForm("Test1", "Test", FormMethod.Post))
                                 {
-                                    @Html.AntiForgeryToken()
+                                @Html.AntiForgeryToken()
 
-                                    <a22 href="#">
-                                        <button class="btn22">T1136.001\Create Account: Local Account!</button>
+                                <a22 href="#">
+                                    <button class="btn22">T1136.001\Create Account: Local Account!</button>
 
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                    </a22>
-                                    <script type="text/javascript">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </a22>
+                                <script type="text/javascript">
 
                                         $(function () {
                                                 var msg = '@ViewData["result"]';
@@ -99,47 +99,17 @@
                                                     window.location.href = "@Url.Action("Test1", "Test")";
                                                 }
                                             });
-                                    </script>
+                                </script>
                                 }
                             </td>
                             <td>
                                 @using (Html.BeginForm("Test2", "Test", FormMethod.Post))
                                 {
-                                    @Html.AntiForgeryToken()
-
-                                    <a22 href="#">
-                                        <button class="btn22">
-                                            T1136.001\Delete Account: Local Account
-                                        </button>
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-
-                                    </a22>
-
-                                    <script type="text/javascript">
-
-                                        $(function () {
-                                                var msg = '@ViewData["result"]';
-                                                if (msg == '1')
-                                                {
-                                                    alert("Test is completed ");
-                                                    window.location.href = "@Url.Action("Test2", "Test")";
-                                                }
-                                        });
-                                    </script>
-                                }
-                            </td>
-                        </tr>
-                        <tr>
-                            @using (Html.BeginForm("Test3", "Test", FormMethod.Post))
-                            {
                                 @Html.AntiForgeryToken()
 
                                 <a22 href="#">
                                     <button class="btn22">
-                                        T1115\Clipboard Data
+                                        T1136.001\Delete Account: Local Account
                                     </button>
                                     <span></span>
                                     <span></span>
@@ -149,6 +119,36 @@
                                 </a22>
 
                                 <script type="text/javascript">
+
+                                        $(function () {
+                                                var msg = '@ViewData["result"]';
+                                                if (msg == '1')
+                                                {
+                                                    alert("Test is completed ");
+                                                    window.location.href = "@Url.Action("Test2", "Test")";
+                                                }
+                                        });
+                                </script>
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            @using (Html.BeginForm("Test3", "Test", FormMethod.Post))
+                            {
+                            @Html.AntiForgeryToken()
+
+                            <a22 href="#">
+                                <button class="btn22">
+                                    T1115\Clipboard Data
+                                </button>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </a22>
+
+                            <script type="text/javascript">
                             $(function() {
                             var msg = '@ViewData["result"]';
                             if (msg == '1')
@@ -158,7 +158,7 @@
 
                             }
                         });
-                                </script>
+                            </script>
                             }
                         </tr>
                     </table>
@@ -183,20 +183,20 @@
 
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.TestID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CustomerID)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Result)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.State)
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TestID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Result)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.State)
+                            </td>
+                        </tr>
                         }
 
                     </table>
