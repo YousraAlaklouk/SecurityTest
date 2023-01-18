@@ -17,6 +17,7 @@ namespace SecurityTest.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+
             return View();
         }
         public ActionResult Registered()
@@ -50,7 +51,7 @@ namespace SecurityTest.Controllers
                 if (Request.HttpMethod == "POST")
                 {
                     Enroll er = new Enroll();
-                    using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
+                    using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-CNJT2HB\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
                     {
                         using (SqlCommand cmd = new SqlCommand("INSERT INTO Customer (Username,Email ,Fullname, BirthDate, Gender,Password) VALUES (@Username,@Email,@Fullname, @BirthDate,@Gender,@Password)", con))
                         {
@@ -80,7 +81,7 @@ namespace SecurityTest.Controllers
         [ActionName("IndexLogin")]
         public ActionResult IndexLogin(Enroll e)
         {
-            SqlConnection con = new SqlConnection("Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True");
+            SqlConnection con = new SqlConnection("Data Source=DESKTOP-CNJT2HB\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True");
             string SqlQuery = "select Email,Password from Customer where Email=@Email and Password=@Password";
             con.Open();
             SqlCommand cmd = new SqlCommand(SqlQuery, con); ;

@@ -9,17 +9,21 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Data;
+using Dapper;
 
 namespace SecurityTest.Controllers
 {
     public class AccountController : Controller
     {
         string email = HomeController.email;
-
+        SecurityEntities db;
         // GET: EditProfile
         public ActionResult EditAccount()
         {
-            return View();
+            db = new SecurityEntities();
+            List<Customer> customers = db.Customers.ToList();
+
+            return View(customers.Find(p => p.Email == Session["Email"].ToString()));
         }
         public ActionResult UpdateAccount(Enroll e)
         {
@@ -28,7 +32,7 @@ namespace SecurityTest.Controllers
                 if (Request.HttpMethod == "POST")
                 {
                     Enroll er = new Enroll();
-                    using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
+                    using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-CNJT2HB\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True"))
                     {
                         using (SqlCommand cmd = new SqlCommand("UPDATE Customer SET FullName  = '" + e.FullName.Trim() + "', BirthDate ='" + e.BirthDate.Trim() + "', Gender = @gender WHERE Email = @email ", con))
                         {
@@ -54,11 +58,11 @@ namespace SecurityTest.Controllers
 
 public string value = "";
 
-        [HttpPost]
+  /*      [HttpPost]
         public ActionResult Account(Enroll e)
         {
-/*            string female = "Female";
-            string male = "Male";*/
+*//*            string female = "Female";
+            string male = "Male";*//*
             try
             {
                 if (Request.HttpMethod == "POST")
@@ -77,7 +81,7 @@ public string value = "";
                             dr = cmd.ExecuteReader();
                             if (dr.Read())
                             {
-                                e.Email = dr["Email"].ToString();
+                                EditAccount.txtname.text = dr["Email"].ToString();
                                 e.UserName = dr["UserName"].ToString();
 
                                 e.FullName = dr["FullName"].ToString();
@@ -88,7 +92,7 @@ public string value = "";
 
 
 
-                                /*
+                                *//*
                                                             if (dr["Gender"].ToString().Trim() == female)
                                                             {
                                                                     List<SelectListItem> items = PopulateFruits();
@@ -110,7 +114,7 @@ public string value = "";
                                                                 Male.Checked = false;
                                                                 NotToSay.Checked = true;
 
-                                                            }*/
+                                                            }*//*
 
                                 Response.Write("<script>alert('sucsseful ');</script>");
 
@@ -133,7 +137,7 @@ public string value = "";
                 MessageBox.Show(ee.Message);
                 return View();
             }
-        }
+        }*/
 
 
     }

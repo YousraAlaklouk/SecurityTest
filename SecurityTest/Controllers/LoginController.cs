@@ -26,7 +26,7 @@ namespace SecurityTest.Controllers
         public ActionResult Index(Enroll e)
         {
             //String SqlCon = ConfigurationManager.ConnectionStrings["ConnDB"].ConnectionString;
-            SqlConnection con = new SqlConnection("Data Source=DESKTOP-UJH3HOQ\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True");
+            SqlConnection con = new SqlConnection("Data Source=DESKTOP-CNJT2HB\\SQLEXPRESS;Initial Catalog= SecurityS&Y;Integrated Security=True");
             string SqlQuery = "select Email,Password from Customer where Email=@Email and Password=@Password";
             con.Open();
             SqlCommand cmd = new SqlCommand(SqlQuery, con); ;
@@ -59,13 +59,13 @@ namespace SecurityTest.Controllers
             //return new JsonResult { Data = new { status = status } };  
         }
 
-        [HttpGet]
+ /*       [HttpGet]
         public ActionResult Welcome(Enroll e)
         {
             Enroll user = new Enroll();
             DataSet ds = new DataSet();
 
-            using (SqlConnection con = new SqlConnection("Data Source=PRIYANKA\\SQLEXPRESS;Integrated Security=true;Initial Catalog=Sample"))
+            using (SqlConnection con = new SqlConnection("Data Source=DESKTOP-CNJT2HB\SQLEXPRESS;Integrated Security=true;Initial Catalog=Sample"))
             {
                 using (SqlCommand cmd = new SqlCommand("sp_GetEnrollmentDetails", con))
                 {
@@ -93,7 +93,7 @@ namespace SecurityTest.Controllers
 
             }
             return View(user);
-        }
+        }*/
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();

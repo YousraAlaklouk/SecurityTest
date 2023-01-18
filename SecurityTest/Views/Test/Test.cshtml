@@ -82,7 +82,7 @@
                                     @Html.AntiForgeryToken()
 
                                     <a22 href="#">
-                                        <button class="btn22">T1136.001\Create Account: Local Account!</button>
+                                        <button id="1" class="btn22">T1136.001\Create Account: Local Account!</button>
 
                                         <span></span>
                                         <span></span>
@@ -96,6 +96,7 @@
                                                 if (msg == '1')
                                                 {
                                                     alert("Test is completed ");
+                                                    document.querySelector('#1').disabled = true;
                                                     window.location.href = "@Url.Action("Test1", "Test")";
                                                 }
                                             });
